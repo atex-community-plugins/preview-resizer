@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template-definition version="1.0" xmlns="http://www.polopoly.com/polopoly/cm/app/xml">
+	<input-template name="com.atex.plugins.preview-reszier.Header.Config" label="Preview resizer config">
+		<policy>com.polopoly.cm.policy.ReferenceMetaDataPolicy</policy>
+		<editor>com.polopoly.cm.app.widget.OTopPolicyWidget</editor>
+		<viewer>com.polopoly.cm.app.widget.OTopPolicyWidget</viewer>
+		
+        <field name="name" input-template="p.ContentName" />
+        <field name="previewModeBtnText" input-template="p.TextInput" label="Preview Mode Btn Text" />
+        
+		<field name="deviceProfiles" input-template="p.TextArea" label="Device Profiles">
+		  <param name="rows">5</param>
+		  <param name="style">width: 98%</param>
+		</field>
+		<field name="windowBreakpoints" input-template="p.TextArea" label="Window Breakpoints">
+		  <param name="rows">5</param>
+		  <param name="style">width: 98%</param>
+		</field>
+		
+	    <field name="windowDefaultView" input-template="p.Select" label="Window Default View">
+          <param name="size">1</param>
+          <param name="selected">0</param>
+          <param name="multivalued">false</param>
+	      <param name="label_0">None</param>
+	      <param name="value_0">none</param>
+	      <param name="label_1">All</param>
+	      <param name="value_1">all</param>
+	      <param name="label_2">Window</param>
+	      <param name="value_2">window</param>
+	      <param name="label_3">Handset</param>
+	      <param name="value_3">handset</param>
+	    </field>
+	    <field name="IFrameDefaultView" input-template="p.Select" label="IFrame Default View">
+          <param name="size">1</param>
+          <param name="selected">0</param>
+          <param name="multivalued">false</param>
+	      <param name="label_0">None</param>
+	      <param name="value_0">none</param>
+	      <param name="label_1">All</param>
+	      <param name="value_1">all</param>
+	      <param name="label_2">Window</param>
+	      <param name="value_2">window</param>
+	      <param name="label_3">Handset</param>
+	      <param name="value_3">handset</param>
+	    </field>
+		
+    </input-template>
+</template-definition>
