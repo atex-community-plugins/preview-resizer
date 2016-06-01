@@ -4,7 +4,13 @@
 		<policy>com.polopoly.cm.policy.ReferenceMetaDataPolicy</policy>
 		<editor>com.polopoly.cm.app.widget.OTopPolicyWidget</editor>
 		<viewer>com.polopoly.cm.app.widget.OTopPolicyWidget</viewer>
-		
+
+		<type>AppConfig</type>
+		<param name="EditState_saveAndInsert">false</param>
+		<param name="EditState_saveAndView">true</param>
+		<param name="EditState_saveAndClose">true</param>
+		<param name="ViewState_insert">false</param>
+
         <field name="name" input-template="p.ContentName" />
         <field name="previewModeBtnText" input-template="p.TextInput" label="Preview Mode Btn Text" />
         

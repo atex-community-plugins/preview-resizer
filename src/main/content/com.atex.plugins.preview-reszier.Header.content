@@ -1,7 +1,8 @@
 id:.cnfg
-major:content
+major:appconfig
 inputtemplate:com.atex.plugins.preview-reszier.Header.Config
 name:Preview resizer config
+securityparent:p.siteengine.Configuration.d
 component:previewModeBtnText:value:Preview Mode
 component:deviceProfiles:value:[ { device\: 'window',size\: 1600}, { device\: 'window',size\: 1440}, { device\: 'window', size\: 1280 }, { aspect\: '4x3', device\:'handset', label\: 'tablet', landscape\: true, size\: 1024 }, { device\:'window', size\: 960 }, { device\: 'window', size\: 840 }, { aspect\:'4x3', device\: 'handset', label\: 'tablet', landscape\: false, size\:720, }, { device\: 'window', size\: 600 }, { aspect\: '16x9', device\:'handset', label\: 'phone', landscape\: true, size\: 600 }, { device\:'window', size\: 480 }, { aspect\: '16x9', device\: 'handset', label\:'phone', size\: 360 } ]
 component:windowBreakpoints:value:[ { label\: 'xsmall', size\: 480 }, { label\: 'small', size\:600 }, { label\: 'medium', size\: 960 }, { label\: 'large', size\: 1280 }, { label\: 'xlarge', size\: Number.MAX_SAFE_INTEGER } ]

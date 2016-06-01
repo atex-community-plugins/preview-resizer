@@ -26,7 +26,7 @@
 
   <groupId>com.atex.plugins</groupId>
   <artifactId>preview-resizer</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -40,6 +40,23 @@
       <url>http://maven.polopoly.com/nexus/content/groups/polopoly-public</url>
     </pluginRepository>
   </pluginRepositories>
+
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>polopoly-pd-plugins</id>
+      <name>Polopoly Product Plugins</name>
+      <url>http://maven.polopoly.com/nexus/content/repositories/polopoly-pd-plugins</url>
+      <layout>default</layout>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>polopoly-pd-plugins-snapshots</id>
+      <name>Polopoly Product Plugins Snapshots</name>
+      <url>http://maven.polopoly.com/nexus/content/repositories/polopoly-pd-plugins-snapshots</url>
+      <layout>default</layout>
+    </snapshotRepository>
+  </distributionManagement>
 
   <repositories>
     <repository>
