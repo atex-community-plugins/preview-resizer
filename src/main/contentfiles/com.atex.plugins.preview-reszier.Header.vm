@@ -17,7 +17,7 @@
         	var initPreviewMode = function() {
                   var resizer = new DeviceResizer({
                         defaultURL: window.location.href,
-                        defaultWindowWidth: 840,
+                        defaultWindowWidth: window.outerWidth,
                         defaultHandsetWidth: 360,
                         deviceProfiles: $previewConfig.deviceProfiles.value,
                         windowBreakpoints: $previewConfig.windowBreakpoints.value
@@ -28,6 +28,7 @@
                       child.style.visibility = "hidden";
                   }
                   document.body.insertBefore(resizer, document.body.firstChild);
+              $('body').css({"overflow":"hidden"});
         		  initPreviewModeDone = true;	  
         	};
 			
