@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template-definition version="1.0" xmlns="http://www.polopoly.com/polopoly/cm/app/xml">
 	<input-template name="com.atex.plugins.preview-reszier.Header.Config" label="Preview resizer config">
-		<policy>com.polopoly.cm.policy.ReferenceMetaDataPolicy</policy>
-		<editor>com.polopoly.cm.app.widget.OTopPolicyWidget</editor>
-		<viewer>com.polopoly.cm.app.widget.OTopPolicyWidget</viewer>
+		<policy>com.atex.plugins.baseline.policy.BaselinePolicy</policy>
+		<editor>com.polopoly.plugin.OPluginConfigContextPolicyWidget</editor>
+		<viewer>com.polopoly.plugin.OPluginConfigContextPolicyWidget</viewer>
 
 		<type>AppConfig</type>
 		<param name="EditState_saveAndInsert">false</param>
