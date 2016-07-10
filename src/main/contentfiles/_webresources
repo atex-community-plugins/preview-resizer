@@ -1,2 +1,2 @@
-# Renders Open Graph meta-tags in page header.
-com.atex.plugins.preview-reszier.Header.ot
+# Renders the necessary preview controller ccode in the Page Header
+com.atex.plugins.preview-resizer.ot

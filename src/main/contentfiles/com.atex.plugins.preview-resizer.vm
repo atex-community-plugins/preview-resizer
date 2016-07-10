@@ -1,0 +1,54 @@
+#if($m.request.preview.inPreviewMode)
+	#set($strClazz = $m.getClass().forName("java.lang.String"))
+	#set($extIdClazz = $m.getClass().forName("com.polopoly.cm.ExternalContentId"))
+	#set($extId = $extIdClazz.getConstructor($strClazz).newInstance("plugins.com.atex.plugins.preview-resizer.Config"))
+	#set($previewConfig = $tool_model.getModel($extId))
+    <script src="#file({'contentId': $filesContentId, 'filename':'/webcomponents-lite.min.js'})"></script>
+	<link rel="stylesheet" type="text/css" href="#file({'contentId': $filesContentId, 'filename':'/preview-mode.css'})">
+    <link rel="import" href="#file({'contentId': $filesContentId, 'filename':'/components.html'})">
+<script>
+    var initPreviewModeDone = false;
+    var initPreviewMode = function() {
+        var resizer = new DeviceResizer({
+            defaultURL: window.location.href,
+            defaultWindowWidth: window.outerWidth,
+            defaultHandsetWidth: 360,
+            deviceProfiles: $previewConfig.deviceProfiles.value,
+            windowBreakpoints: $previewConfig.windowBreakpoints.value
+        });
+        document.body.innerHTML = "";
+        document.body.insertBefore(resizer, document.body.firstChild);
+        $('body').css({"overflow":"hidden"});
+        initPreviewModeDone = true;
+    };
+    if (!window.frameElement) {
+        window.addEventListener('WebComponentsReady', function(e) {
+            if ('$previewConfig.windowDefaultView.value' === 'none') {
+                var button = $('<a href="#" class="previewMode">$previewConfig.previewModeBtnText.value</a>');
+                $('body').prepend(button);
+                button.click (function(){
+                    initPreviewMode();
+                });
+            } else {
+                initPreviewMode();
+                $('iron-selector .tab[name="$previewConfig.windowDefaultView.value"]').click();
+            }
+        });
+     } else {
+        if (!window.parent.initPreviewModeDone) {
+            window.addEventListener('WebComponentsReady', function(e) {
+                if ('$previewConfig.IFrameDefaultView.value' === 'none') {
+                    var button = $('<a href="#" class="previewMode">$previewConfig.previewModeBtnText.value</a>');
+                    $('body').prepend(button);
+                    button.click (function(){
+                        initPreviewMode();
+                    });
+                } else {
+                    initPreviewMode();
+                    $('iron-selector .tab[name="$previewConfig.IFrameDefaultView.value"]').click();
+                }
+            });
+        }
+     }
+</script>
+#end

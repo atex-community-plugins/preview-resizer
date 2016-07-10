@@ -1,4 +1,4 @@
-<output-template name="com.atex.plugins.preview-reszier.Header.ot" input-template="p.siteengine.ElementOutputTemplate">
+<output-template name="com.atex.plugins.preview-resizer.ot" input-template="p.siteengine.ElementOutputTemplate">
   <content-xml>
     <contentref group="plugin" name="plugindef">
       <contentid>
@@ -13,6 +13,6 @@
         <externalid>p.siteengine.VelocityRenderer</externalid>
       </contentid>
     </contentref>
-    <component group="output/renderer" name="templateFileName">com.atex.plugins.preview-reszier.Header.vm</component>
+    <component group="output/renderer" name="templateFileName">com.atex.plugins.preview-resizer.vm</component>
   </content-xml>
 </output-template>

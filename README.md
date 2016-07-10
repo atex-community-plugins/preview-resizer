@@ -16,13 +16,13 @@ Add a dependency to the project in your top level pom.
     <dependency>
       <groupId>com.atex.plugins</groupId>
       <artifactId>preview-resizer</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.3</version>
     </dependency>
     
     <dependency>
       <groupId>com.atex.plugins</groupId>
       <artifactId>preview-resizer</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.3</version>
       <classifier>contentdata</classifier>
     </dependency>
     
