@@ -9,8 +9,14 @@
 <script>
     var initPreviewModeDone = false;
     var initPreviewMode = function() {
+        var differentWindowLocationHref = window.location.href;
+        if (differentWindowLocationHref.indexOf("#") > -1) {
+            differentWindowLocationHref = differentWindowLocationHref.replace("#", "/#");
+        } else {
+            differentWindowLocationHref += "/";
+        }
         var resizer = new DeviceResizer({
-            defaultURL: window.location.href,
+            defaultURL: differentWindowLocationHref,
             defaultWindowWidth: window.outerWidth,
             defaultHandsetWidth: 360,
             deviceProfiles: $previewConfig.deviceProfiles.value,
