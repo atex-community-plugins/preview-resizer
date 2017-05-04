@@ -8,7 +8,7 @@
     <link rel="import" href="#file({'contentId': $filesContentId, 'filename':'/components.html'})">
 <script>
     var initPreviewModeDone = false;
-    var initPreviewMode = function() {
+    var initPreviewMode = function(defaultView) {
         var differentWindowLocationHref = window.location.href;
         if (differentWindowLocationHref.indexOf("?") > -1) {
             differentWindowLocationHref = differentWindowLocationHref.replace("?", "/?");
@@ -17,12 +17,22 @@
         } else {
             differentWindowLocationHref += "/";
         }
+        var getCookie = function(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+        var cookieName = "polopoly.preview.selectedTab";
+        var selectedTab = getCookie(cookieName) || defaultView;
+        
         var resizer = new DeviceResizer({
             defaultURL: differentWindowLocationHref,
             defaultWindowWidth: window.outerWidth,
             defaultHandsetWidth: 360,
             deviceProfiles: $previewConfig.deviceProfiles.value,
-            windowBreakpoints: $previewConfig.windowBreakpoints.value
+            windowBreakpoints: $previewConfig.windowBreakpoints.value,
+            selectedTab : selectedTab,
+            cookieName : cookieName
         });
         document.body.innerHTML = "";
         document.body.insertBefore(resizer, document.body.firstChild);
@@ -35,11 +45,10 @@
                 var button = $('<a href="#" class="previewMode">$previewConfig.previewModeBtnText.value</a>');
                 $('body').prepend(button);
                 button.click (function(){
-                    initPreviewMode();
+                    initPreviewMode("$previewConfig.windowDefaultView.value");
                 });
             } else {
-                initPreviewMode();
-                $('iron-selector .tab[name="$previewConfig.windowDefaultView.value"]').click();
+                initPreviewMode("$previewConfig.windowDefaultView.value");
             }
         });
      } else {
@@ -49,11 +58,10 @@
                     var button = $('<a href="#" class="previewMode">$previewConfig.previewModeBtnText.value</a>');
                     $('body').prepend(button);
                     button.click (function(){
-                        initPreviewMode();
+                        initPreviewMode("$previewConfig.IFrameDefaultView.value");
                     });
                 } else {
-                    initPreviewMode();
-                    $('iron-selector .tab[name="$previewConfig.IFrameDefaultView.value"]').click();
+                    initPreviewMode("$previewConfig.IFrameDefaultView.value");
                 }
             });
         }

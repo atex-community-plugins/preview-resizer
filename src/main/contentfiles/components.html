@@ -12937,6 +12937,10 @@
                         _trackingQueue: {
                             type: Array,
                             value: []
+                        },
+                        cookieName : {
+                            type: String,
+                            value: "polopoly.preview.selectedTab"
                         }
                     },
                     behaviors: [Polymer.IronResizableBehavior],
@@ -12947,7 +12951,8 @@
                     factoryImpl: function(e) {
                         Object.keys(e).map(function(t) {
                             "_" != t.charAt(0) && void 0 !== this[t] && typeof this[t] !== Function && (this[t] = e[t])
-                        }, this)
+                        }, this);
+                        this._selectedTab = e.selectedTab;
                     },
                     attached: function() {
                         this.$.handset.setAttribute("device-width", this.defaultHandsetWidth), this.$.window.setAttribute("device-width", this.defaultWindowWidth), this._loadHash(), window.addEventListener("load", this._sendQueuedTrackingEvents.bind(this))
@@ -12959,7 +12964,12 @@
                         var t = "all" == this._selectedTab;
                         this._setSizeSelectorVisibility(), this._enableToolbarOverlay(!1), this.toggleAttribute("disable-sizing", t, this.$.handset), this.toggleAttribute("disable-sizing", t, this.$.window);
                         var i = this.$[this._selectedTab];
-                        i && i.deviceWidth && (this._selectedWidth = i.deviceWidth), this.set("_hashParams.device", this._selectedTab), this._sendGaEvent("resizer", "device change", this._selectedTab)
+                        i && i.deviceWidth && (this._selectedWidth = i.deviceWidth), this.set("_hashParams.device", this._selectedTab), this._sendGaEvent("resizer", "device change", this._selectedTab);
+                        if (this.cookieName) {
+                            var expiration_date = new Date();
+                            expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+                            document.cookie = this.cookieName + "=" + this._selectedTab + "; path=/; expires=" + expiration_date.toUTCString();
+                        }
                     },
                     _updateSelectedSize: function(e) {
                         var t = this.$[this._selectedTab];
