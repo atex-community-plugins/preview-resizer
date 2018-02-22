@@ -9,6 +9,7 @@
 <script>
     var initPreviewModeDone = false;
     var initPreviewMode = function(defaultView) {
+        initPreviewModeDone = true;
         var differentWindowLocationHref = window.location.href;
         if (differentWindowLocationHref.indexOf("?") > -1) {
             differentWindowLocationHref = differentWindowLocationHref.replace("?", "/?");
@@ -36,17 +37,13 @@
         });
         document.body.innerHTML = "";
         document.body.insertBefore(resizer, document.body.firstChild);
-        $('body').css({"overflow":"hidden"});
-        initPreviewModeDone = true;
+        document.body.style.overflow = "hidden";
     };
     if (!window.frameElement) {
         window.addEventListener('WebComponentsReady', function(e) {
             if ('$previewConfig.windowDefaultView.value' === 'none') {
-                var button = $('<a href="#" class="previewMode">$previewConfig.previewModeBtnText.value</a>');
-                $('body').prepend(button);
-                button.click (function(){
-                    initPreviewMode("$previewConfig.windowDefaultView.value");
-                });
+                var button = '<a href="#" class="previewMode" onclick=initPreviewMode("$previewConfig.windowDefaultView.value")>$previewConfig.previewModeBtnText.value</a>';
+                document.body.insertAdjacentHTML('afterbegin', button);
             } else {
                 initPreviewMode("$previewConfig.windowDefaultView.value");
             }
@@ -55,11 +52,8 @@
         if (!window.parent.initPreviewModeDone) {
             window.addEventListener('WebComponentsReady', function(e) {
                 if ('$previewConfig.IFrameDefaultView.value' === 'none') {
-                    var button = $('<a href="#" class="previewMode">$previewConfig.previewModeBtnText.value</a>');
-                    $('body').prepend(button);
-                    button.click (function(){
-                        initPreviewMode("$previewConfig.IFrameDefaultView.value");
-                    });
+                    var button = '<a href="#" class="previewMode" onclick=initPreviewMode("$previewConfig.IFrameDefaultView.value")>$previewConfig.previewModeBtnText.value</a>';
+                    document.body.insertAdjacentHTML('afterbegin', button);
                 } else {
                     initPreviewMode("$previewConfig.IFrameDefaultView.value");
                 }
