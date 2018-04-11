@@ -1,10 +1,10 @@
-#if($m.request.preview.inPreviewMode)
+#if($m.request.preview.inPreviewMode && !$m.request.preview.inInteractivePreviewMode)
 	#set($strClazz = $m.getClass().forName("java.lang.String"))
 	#set($extIdClazz = $m.getClass().forName("com.polopoly.cm.ExternalContentId"))
 	#set($extId = $extIdClazz.getConstructor($strClazz).newInstance("plugins.com.atex.plugins.preview-resizer.Config"))
 	#set($previewConfig = $tool_model.getModel($extId))
     <script src="#file({'contentId': $filesContentId, 'filename':'/webcomponents-lite.min.js'})"></script>
-	<link rel="stylesheet" type="text/css" href="#file({'contentId': $filesContentId, 'filename':'/preview-mode.css'})">
+    <link rel="stylesheet" type="text/css" href="#file({'contentId': $filesContentId, 'filename':'/preview-mode.css'})">
     <link rel="import" href="#file({'contentId': $filesContentId, 'filename':'/components.html'})">
 <script>
     var initPreviewModeDone = false;
@@ -25,7 +25,7 @@
         }
         var cookieName = "polopoly.preview.selectedTab";
         var selectedTab = getCookie(cookieName) || defaultView;
-        
+
         var resizer = new DeviceResizer({
             defaultURL: differentWindowLocationHref,
             defaultWindowWidth: window.outerWidth,
@@ -38,12 +38,17 @@
         document.body.innerHTML = "";
         document.body.insertBefore(resizer, document.body.firstChild);
         document.body.style.overflow = "hidden";
+        window.Polopoly = window.Polopoly || {};
+        window.Polopoly.previewResizer = window.Polopoly.previewResizer || {
+          enabled: true,
+          resizer: resizer
+        };
     };
     if (!window.frameElement) {
         window.addEventListener('WebComponentsReady', function(e) {
             if ('$previewConfig.windowDefaultView.value' === 'none') {
                 var button = '<a href="#" class="previewMode" onclick=initPreviewMode("$previewConfig.windowDefaultView.value")>$previewConfig.previewModeBtnText.value</a>';
-                document.body.insertAdjacentHTML('afterbegin', button);
+                    document.body.insertAdjacentHTML('afterbegin', button);
             } else {
                 initPreviewMode("$previewConfig.windowDefaultView.value");
             }
